@@ -22,7 +22,7 @@ resource "aws_lex_bot" "order_flowers" {
 
   intent {
     intent_name    = aws_lex_intent.order_flowers.name
-    intent_version = "1"
+    intent_version = aws_lex_intent.order_flowers.version
   }
 
   locale   = "en-US"

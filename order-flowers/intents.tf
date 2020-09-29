@@ -44,7 +44,7 @@ resource "aws_lex_intent" "order_flowers" {
 
     slot_constraint   = "Required"
     slot_type         = aws_lex_slot_type.flower_types.name
-    slot_type_version = "1"
+    slot_type_version = aws_lex_slot_type.flower_types.version
 
     value_elicitation_prompt {
       max_attempts = 2
