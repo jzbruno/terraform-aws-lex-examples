@@ -6,29 +6,37 @@ This repo contains Terraform config for deploying the example Amazon Lex Bots.
 * OrderFlowers
 * ScheduleAppointment
 
-These were used when developing the aws_lex_* resources for the AWS Terraform Provider.
+## Requirements
 
-* [aws_lex_bot](https://www.terraform.io/docs/providers/aws/r/lex_bot.html)
-* [aws_lex_intent](https://www.terraform.io/docs/providers/aws/r/lex_intent.html)
-* [aws_lex_slot_type](https://www.terraform.io/docs/providers/aws/r/lex_slot_type.html)
+* Terraform 0.12.x
+* Go 1.14.7 (earliest tested may work on other versions)
 
 ## Build Provider
 
-**Unitl the [aws_lex_resources #2616](https://github.com/terraform-providers/terraform-provider-aws/pull/2616) pull request is merged and released, the provider must be [built](https://github.com/terraform-providers/terraform-provider-aws#developing-the-provider) and [installed](https://www.terraform.io/docs/plugins/basics.html#installing-a-plugin).**
+**Until all the Lex PRs are merged and released this procedure can be used to build a working version of the AWS provider with Lex support.**
+
+PRs:
+
+* [aws_lex_slot_type](https://github.com/terraform-providers/terraform-provider-aws/pull/8916)
+* [aws_lex_intent](https://github.com/terraform-providers/terraform-provider-aws/pull/8917)
+* [aws_lex_bot](https://github.com/terraform-providers/terraform-provider-aws/pull/8918)
+* [aws_lex_bot_alias](https://github.com/terraform-providers/terraform-provider-aws/pull/8919)
+
+Procedure:
 
 1. Clone provider repo
 
-    ```
+    ```sh
+    mkdir -p $GOPATH/src/github.com/terraform-providers
     cd $GOPATH/src/github.com/terraform-providers
     git clone git@github.com:terraform-providers/terraform-provider-aws.git
+    git checkout add_aws_lex_bot_alias
     ```
 
 2. Build
 
-    ```
+    ```sh
     cd $GOPATH/src/github.com/terraform-providers/terraform-provider-aws
-    git checkout add_aws_lex_resources
-    export GO111MODULE=on
     make tools
     make build
     ```
@@ -37,7 +45,7 @@ These were used when developing the aws_lex_* resources for the AWS Terraform Pr
 
 1. Clone examples repo
 
-    ```
+    ```sh
     mkdir -p $GOPATH/src/github.com/jzbruno
     cd $GOPATH/src/github.com/jzbruno
     git clone git@github.com:jzbruno/terraform-aws-lex-examples.git
@@ -45,7 +53,7 @@ These were used when developing the aws_lex_* resources for the AWS Terraform Pr
 
 2. Choose an example.
 
-    ```
+    ```sh
     cd terraform-aws-lex-examples
     cd book-trip
     ```
@@ -54,13 +62,13 @@ These were used when developing the aws_lex_* resources for the AWS Terraform Pr
 
 4. Init Terraform.
 
-    ```
+    ```sh
     ln -s $GOPATH/bin/terraform-provider-aws terraform-provider-aws
     terraform init
     ```
 
 5. Apply the config.
 
-    ```
+    ```sh
     terraform apply
     ```
