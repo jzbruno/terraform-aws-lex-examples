@@ -3,3 +3,4 @@
 *.tfstate*
 *.log*
 terraform-provider-aws
+*.tfvars

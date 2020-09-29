@@ -16,7 +16,7 @@ resource "aws_lex_bot" "order_flowers" {
       content      = "I didn't understand you, what would you like to do?"
     }
   }
-
+  description                 = "Bot to order flowers on the behalf of a user"
   detect_sentiment            = false
   idle_session_ttl_in_seconds = 600
 
@@ -27,5 +27,6 @@ resource "aws_lex_bot" "order_flowers" {
 
   locale   = "en-US"
   name     = "OrderFlowers"
+  process_behavior = "SAVE"
   voice_id = "Salli"
 }
