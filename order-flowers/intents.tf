@@ -1,4 +1,4 @@
-resource "aws_lex_intent" "order_flowers_intent" {
+resource "aws_lex_intent" "order_flowers" {
   confirmation_prompt {
     max_attempts = 2
 
@@ -13,7 +13,7 @@ resource "aws_lex_intent" "order_flowers_intent" {
     }
   }
 
-  description = "The time to pick up the flowers"
+  description = "Intent to order a bouquet of flowers for pick up"
 
   fulfillment_activity {
     type = "ReturnIntent"
@@ -43,8 +43,8 @@ resource "aws_lex_intent" "order_flowers_intent" {
     ]
 
     slot_constraint   = "Required"
-    slot_type         = "${aws_lex_slot_type.flower_types.name}"
-    slot_type_version = "${aws_lex_slot_type.flower_types.version}"
+    slot_type         = aws_lex_slot_type.flower_types.name
+    slot_type_version = "1"
 
     value_elicitation_prompt {
       max_attempts = 2

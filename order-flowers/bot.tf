@@ -1,4 +1,4 @@
-resource "aws_lex_bot" "order_flowers_bot" {
+resource "aws_lex_bot" "order_flowers" {
   abort_statement {
     message {
       content_type = "PlainText"
@@ -17,23 +17,15 @@ resource "aws_lex_bot" "order_flowers_bot" {
     }
   }
 
-  description                 = "Bot to order flowers on the behalf of a user"
+  detect_sentiment            = false
   idle_session_ttl_in_seconds = 600
 
   intent {
-    intent_name    = "${aws_lex_intent.order_flowers_intent.name}"
-    intent_version = "${aws_lex_intent.order_flowers_intent.version}"
+    intent_name    = aws_lex_intent.order_flowers.name
+    intent_version = "1"
   }
 
-  locale           = "en-US"
-  name             = "OrderFlowers"
-  process_behavior = "BUILD"
-  voice_id         = "Salli"
-}
-
-resource "aws_lex_bot_alias" "order_flowers_dev_bot_alias" {
-  bot_name    = "${aws_lex_bot.order_flowers_bot.name}"
-  bot_version = "${aws_lex_bot.order_flowers_bot.version}"
-  description = "Development version of bot to order flowers on the behalf of a user"
-  name        = "OrderFlowersDev"
+  locale   = "en-US"
+  name     = "OrderFlowers"
+  voice_id = "Salli"
 }
