@@ -1,4 +1,4 @@
-resource "aws_lex_intent" "make_appointment_intent" {
+resource "aws_lex_intent" "make_appointment" {
   confirmation_prompt {
     max_attempts = 2
 
@@ -44,8 +44,8 @@ resource "aws_lex_intent" "make_appointment_intent" {
     ]
 
     slot_constraint   = "Required"
-    slot_type         = "${aws_lex_slot_type.appointment_types.name}"
-    slot_type_version = "${aws_lex_slot_type.appointment_types.version}"
+    slot_type         = aws_lex_slot_type.appointment_types.name
+    slot_type_version = aws_lex_slot_type.appointment_types.version
 
     value_elicitation_prompt {
       max_attempts = 2

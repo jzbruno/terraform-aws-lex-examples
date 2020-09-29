@@ -1,4 +1,4 @@
-resource "aws_lex_bot" "schedule_appointment_bot" {
+resource "aws_lex_bot" "schedule_appointment" {
   abort_statement {
     message {
       content_type = "PlainText"
@@ -18,22 +18,16 @@ resource "aws_lex_bot" "schedule_appointment_bot" {
   }
 
   description                 = "Bot to book a dentist appointment"
+  detect_sentiment            = false
   idle_session_ttl_in_seconds = 600
 
   intent {
-    intent_name    = "${aws_lex_intent.make_appointment_intent.name}"
-    intent_version = "${aws_lex_intent.make_appointment_intent.version}"
+    intent_name    = aws_lex_intent.make_appointment.name
+    intent_version = aws_lex_intent.make_appointment.version
   }
 
   locale           = "en-US"
   name             = "ScheduleAppointment"
-  process_behavior = "BUILD"
+  process_behavior = "SAVE"
   voice_id         = "Salli"
-}
-
-resource "aws_lex_bot_alias" "schedule_appointment_dev_bot_alias" {
-  bot_name    = "${aws_lex_bot.schedule_appointment_bot.name}"
-  bot_version = "${aws_lex_bot.schedule_appointment_bot.version}"
-  description = "Development version of bot to book a dentist appointment"
-  name        = "ScheduleAppointmentDev"
 }
