@@ -9,37 +9,7 @@ This repo contains Terraform config for deploying the example Amazon Lex Bots.
 ## Requirements
 
 * Terraform 0.12.x
-* Go 1.14.7 (earliest tested may work on other versions)
-
-## Build Provider
-
-**Until all the Lex PRs are merged and released this procedure can be used to build a working version of the AWS provider with Lex support.**
-
-PRs:
-
-* [aws_lex_slot_type](https://github.com/terraform-providers/terraform-provider-aws/pull/8916)
-* [aws_lex_intent](https://github.com/terraform-providers/terraform-provider-aws/pull/8917)
-* [aws_lex_bot](https://github.com/terraform-providers/terraform-provider-aws/pull/8918)
-* [aws_lex_bot_alias](https://github.com/terraform-providers/terraform-provider-aws/pull/8919)
-
-Procedure:
-
-1. Clone provider repo
-
-    ```sh
-    mkdir -p $GOPATH/src/github.com/terraform-providers
-    cd $GOPATH/src/github.com/terraform-providers
-    git clone git@github.com:terraform-providers/terraform-provider-aws.git
-    git checkout add_aws_lex_bot_alias
-    ```
-
-2. Build
-
-    ```sh
-    cd $GOPATH/src/github.com/terraform-providers/terraform-provider-aws
-    make tools
-    make build
-    ```
+* Terraform AWS Provider 3.10.0+
 
 ## Examples
 
@@ -63,7 +33,6 @@ Procedure:
 4. Init Terraform.
 
     ```sh
-    ln -s $GOPATH/bin/terraform-provider-aws terraform-provider-aws
     terraform init
     ```
 
